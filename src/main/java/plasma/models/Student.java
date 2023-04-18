@@ -21,7 +21,7 @@ public class Student {
     @Column(name = "email")
     private String email;
     @Column(name = "studyFormat")
-    private StudyFormat studyFormat;
+    private Role studyFormat;
     @ManyToOne
     @JoinColumn(name = "groups_id")
     private Groups group;
