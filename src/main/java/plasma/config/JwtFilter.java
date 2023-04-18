@@ -1,2 +1,4 @@
-package plasma.config;public class JwtFilter {
+package plasma.config;
+
+public class JwtFilter {
 }

@@ -1,2 +1,4 @@
-package plasma.config;public class SecurityConfig {
+package plasma.config;
+
+public class SecurityConfig {
 }

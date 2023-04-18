@@ -1,2 +1,4 @@
-package plasma.repository;public interface CourseRepository {
+package plasma.repository;
+
+public interface CourseRepository {
 }

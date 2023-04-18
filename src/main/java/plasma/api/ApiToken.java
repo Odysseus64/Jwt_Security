@@ -1,2 +1,4 @@
-package plasma.api;public class ApiToken {
+package plasma.api;
+
+public class ApiToken {
 }

@@ -1,2 +1,4 @@
-package plasma.repository;public interface CompanyRepository {
+package plasma.repository;
+
+public interface CompanyRepository {
 }
