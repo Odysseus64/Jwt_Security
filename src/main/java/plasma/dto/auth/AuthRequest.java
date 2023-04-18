@@ -1,4 +1,4 @@
-package plasma.dto.response;
+package plasma.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,4 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AuthRequest {
     private String email;
+    private String password;
 }

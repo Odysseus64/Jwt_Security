@@ -1,2 +1,4 @@
-package plasma.dto.response;public class StudentResponse {
+package plasma.dto.response;
+
+public class StudentResponse {
 }

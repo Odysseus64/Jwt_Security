@@ -1,2 +1,4 @@
-package plasma.config;public class JwtUtil {
+package plasma.config;
+
+public class JwtUtil {
 }
