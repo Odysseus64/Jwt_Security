@@ -36,13 +36,9 @@ public class JwtUtil {
     }
 
     public boolean verifyToken(String token) {
-        try {
-            Jwts.parser()
-                    .setSigningKey(jwtConfig.getSecretKey())
-                    .parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        Jwts.parser()
+                .setSigningKey(jwtConfig.getSecretKey())
+                .parseClaimsJws(token);
+        return true;
     }
 }

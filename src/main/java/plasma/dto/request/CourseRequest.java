@@ -1,4 +1,4 @@
 package plasma.dto.request;
 
-public class CourseResponse {
+public class CourseRequest {
 }
