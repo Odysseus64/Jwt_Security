@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @ConfigurationProperties(prefix = "app.jwt")
 public class JwtConfiguration {
-    private String secret_key;
-    private String token_prefix;
+    private String secretKey;
+    private String tokenPrefix;
     private Long expirationDateAfterDays;
 
 
