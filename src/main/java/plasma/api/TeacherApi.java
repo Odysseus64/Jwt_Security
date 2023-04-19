@@ -18,10 +18,10 @@ public class TeacherApi {
     private final TeacherService service;
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @PostMapping("/save_teacher")
+    @PostMapping("/save")
     public String save(@RequestBody TeacherRequest request) {
         service.save(request);
-        return "Teacher was successfully saved!";
+        return "Teacher saved";
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'TEACHER')")
@@ -40,13 +40,13 @@ public class TeacherApi {
     @DeleteMapping("/remove/{id}")
     public String remove(@PathVariable Long id) {
         service.deleteById(id);
-        return "Teacher deleted!";
+        return "Teacher deleted";
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'TEACHER')")
     @PutMapping("/update/{id}")
     public String update(@PathVariable Long id, @RequestBody TeacherRequest request) {
         service.update(id, request);
-        return "Teacher updated!";
+        return "Teacher updated";
     }
 }

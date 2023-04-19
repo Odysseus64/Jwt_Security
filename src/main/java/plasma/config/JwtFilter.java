@@ -3,7 +3,6 @@ package plasma.config;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -21,29 +20,19 @@ public class JwtFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String header = request.getHeader(jwtConfig.getAuthorizationHeader());
-        String email = null;
-        String token = null;
-        if (header != null) {
-            if (header.startsWith(jwtConfig.getTokenPrefix() + " ")) {
-                token = header.substring(7);
-                email = jwtUtils.getEmailFromToken(token);
-            }
-        }
-        if (email != null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-            if (jwtUtils.verifyToken(token)) {
+        if (header != null && header.startsWith(jwtConfig.getTokenPrefix() + " ")) {
+            String token = header.substring(7);
+            String email = jwtUtils.getEmailFromToken(token);
+            if (email != null && jwtUtils.verifyToken(token)) {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
+                        userDetailsService.loadUserByUsername(email),
                         null,
-                        userDetails.getAuthorities()
+                        userDetailsService.loadUserByUsername(email).getAuthorities()
                 );
                 authenticationToken.setDetails(
-                        new WebAuthenticationDetailsSource()
-                                .buildDetails(request)
+                        new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
@@ -51,3 +40,4 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
+

@@ -19,21 +19,15 @@ public class CourseService {
     private final ModelMapper modelMapper;
 
     public CourseResponse save(CourseRequest courseRequest) {
-        Course course = modelMapper.map(courseRequest, Course.class);
-        course = courseRepository.save(course);
-        return modelMapper.map(course, CourseResponse.class);
+        return modelMapper.map(courseRepository.save(modelMapper.map(courseRequest, Course.class)), CourseResponse.class);
     }
 
     public CourseResponse findById(Long id) {
-        Course course = courseRepository.findById(id).orElse(null);
-        return modelMapper.map(course, CourseResponse.class);
+        return modelMapper.map(courseRepository.findById(id).orElse(null), CourseResponse.class);
     }
 
     public List<CourseResponse> findAll() {
-        List<Course> courses = courseRepository.findAll();
-        return courses.stream()
-                .map(course -> modelMapper.map(course, CourseResponse.class))
-                .collect(Collectors.toList());
+        return courseRepository.findAll().stream().map(course -> modelMapper.map(course, CourseResponse.class)).collect(Collectors.toList());
     }
 
     public void deleteById(Long id) {

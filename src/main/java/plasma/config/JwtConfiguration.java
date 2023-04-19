@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "app.jwt")
+@ConfigurationProperties(prefix = "neon.jwt")
 public class JwtConfiguration {
     private String key;
     private String tokenPrefix;

@@ -28,9 +28,7 @@ public class CompanyService {
     }
 
     public List<CompanyResponse> findAll() {
-        return companyRepository.findAll().stream()
-                .map(company -> modelMapper.map(company, CompanyResponse.class))
-                .collect(Collectors.toList());
+        return companyRepository.findAll().stream().map(company -> modelMapper.map(company, CompanyResponse.class)).collect(Collectors.toList());
     }
 
     public void deleteById(Long id) {
