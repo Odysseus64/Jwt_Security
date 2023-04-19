@@ -16,9 +16,7 @@ public class UserService {
     private final PasswordEncoder bCryptPasswordEncoder;
 
     public ResponseEntity<String> createStudent(UserRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("this email is already have in!");
-        }
+        userRepository.existsByEmail(request.getEmail());
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
@@ -29,9 +27,7 @@ public class UserService {
     }
 
     public ResponseEntity<String> createManager(UserRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("this email is already have in!");
-        }
+        userRepository.existsByEmail(request.getEmail());
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));

@@ -3,7 +3,7 @@ package plasma.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import plasma.dto.response.TeacherResponse;
+import plasma.dto.request.TeacherRequest;
 import plasma.models.Teacher;
 
 @Component
@@ -11,7 +11,7 @@ import plasma.models.Teacher;
 public class TeacherMapper {
     private PasswordEncoder passwordEncoder;
 
-    public Teacher teacher (TeacherResponse teacherResponse){
+    public Teacher teacher (TeacherRequest teacherResponse){
         Teacher teacher = new Teacher();
         teacher.setEmail(teacherResponse.getEmail());
         teacher.setFirst_name(teacherResponse.getFirst_name());

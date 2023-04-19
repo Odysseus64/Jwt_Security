@@ -1,6 +1,5 @@
 package plasma.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,21 +19,16 @@ public class CompanyService {
     private final ModelMapper modelMapper;
 
     public CompanyResponse save(CompanyRequest companyRequest) {
-        Company company = modelMapper.map(companyRequest, Company.class);
-        company = companyRepository.save(company);
+        Company company = companyRepository.save(modelMapper.map(companyRequest, Company.class));
         return modelMapper.map(company, CompanyResponse.class);
     }
 
     public CompanyResponse findById(Long id) {
-        Company company = companyRepository.findById(id).orElse(null);
-        return modelMapper.map(company, CompanyResponse.class);
+        return modelMapper.map(companyRepository.findById(id).orElse(null), CompanyResponse.class);
     }
 
     public List<CompanyResponse> findAll() {
-        List<Company> companies = companyRepository.findAll();
-        return companies.stream()
-                .map(company -> modelMapper.map(company, CompanyResponse.class))
-                .collect(Collectors.toList());
+        return companyRepository.findAll().stream().map(company -> modelMapper.map(company, CompanyResponse.class)).collect(Collectors.toList());
     }
 
     public void deleteById(Long id) {

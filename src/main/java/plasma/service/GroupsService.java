@@ -14,24 +14,22 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class GroupsService {
-
     private final GroupsRepository groupRepository;
     private final ModelMapper modelMapper;
 
     public GroupsResponse save(GroupsRequest groupRequest) {
-        Groups group = modelMapper.map(groupRequest, Groups.class);
-        group = groupRepository.save(group);
+        Groups group = groupRepository.save(modelMapper.map(groupRequest, Groups.class));
         return modelMapper.map(group, GroupsResponse.class);
     }
 
     public GroupsResponse findById(Long id) {
-        Groups group = groupRepository.findById(id).orElse(null);
-        return modelMapper.map(group, GroupsResponse.class);
+        return groupRepository.findById(id)
+                .map(group -> modelMapper.map(group, GroupsResponse.class))
+                .orElse(null);
     }
 
     public List<GroupsResponse> findAll() {
-        List<Groups> groups = groupRepository.findAll();
-        return groups.stream()
+        return groupRepository.findAll().stream()
                 .map(group -> modelMapper.map(group, GroupsResponse.class))
                 .collect(Collectors.toList());
     }
@@ -40,10 +38,11 @@ public class GroupsService {
         groupRepository.deleteById(id);
     }
 
-    public GroupsResponse updateGroup(Long id, GroupsRequest groupRequest) {
-        Groups group = groupRepository.findById(id).orElse(null);
-        modelMapper.map(groupRequest, group);
-        group = groupRepository.save(group);
-        return modelMapper.map(group, GroupsResponse.class);
+    public GroupsResponse update(Long id, GroupsRequest groupRequest) {
+        return groupRepository.findById(id).map(group -> {
+                    modelMapper.map(groupRequest, group);
+                    return modelMapper.map(groupRepository.save(group), GroupsResponse.class);
+                })
+                .orElse(null);
     }
 }

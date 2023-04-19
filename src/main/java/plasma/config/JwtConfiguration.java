@@ -1,15 +1,13 @@
 package plasma.config;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "app.jwt")
+@ConfigurationProperties(prefix = "neon.jwt")
 public class JwtConfiguration {
     private String key;
     private String tokenPrefix;
