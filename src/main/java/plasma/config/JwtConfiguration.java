@@ -1,5 +1,6 @@
 package plasma.config;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,11 +8,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 @Component
-@Setter
-@Getter
+@Data
 @ConfigurationProperties(prefix = "app.jwt")
 public class JwtConfiguration {
-    private String secretKey;
+    private String key;
     private String tokenPrefix;
     private Long expirationDateAfterDays;
 

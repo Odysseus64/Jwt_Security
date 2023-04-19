@@ -14,14 +14,14 @@ import java.util.Date;
 @AllArgsConstructor
 public class JwtUtil {
 
-    private final SecurityConfig jwtConfig;
+    private final JwtConfiguration jwtConfig;
 
     public String generateToken(Authentication authentication) {
         User authInfo = (User) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject(authInfo.getEmail())
-                .signWith(SignatureAlgorithm.HS256, jwtConfig.getSecretKey())
+                .signWith(SignatureAlgorithm.HS256, jwtConfig.getKey())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + (jwtConfig.getExpirationDateAfterDays() * 6500000)))
                 .compact();
@@ -29,7 +29,7 @@ public class JwtUtil {
 
     public String getEmailFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(jwtConfig.getSecretKey())
+                .setSigningKey(jwtConfig.getKey())
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
@@ -37,7 +37,7 @@ public class JwtUtil {
 
     public boolean verifyToken(String token) {
         Jwts.parser()
-                .setSigningKey(jwtConfig.getSecretKey())
+                .setSigningKey(jwtConfig.getKey())
                 .parseClaimsJws(token);
         return true;
     }
