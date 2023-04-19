@@ -20,6 +20,8 @@ public class Student {
     private String last_name;
     @Column(name = "email")
     private String email;
+    @Column(name = "password")
+    private String password;
     @Column(name = "studyFormat")
     private Role studyFormat;
     @ManyToOne

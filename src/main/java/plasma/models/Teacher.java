@@ -20,6 +20,8 @@ public class Teacher {
     private String last_name;
     @Column(name = "email")
     private String email;
+    @Column(name = "password")
+    private String password;
     @OneToOne
     @JoinColumn(name = "course_id")
     private Course course;
