@@ -40,7 +40,7 @@ public class GroupsService {
         groupRepository.deleteById(id);
     }
 
-    public GroupsResponse updateGroup(Long id, GroupsRequest groupRequest) {
+    public GroupsResponse update(Long id, GroupsRequest groupRequest) {
         Groups group = groupRepository.findById(id).orElse(null);
         modelMapper.map(groupRequest, group);
         group = groupRepository.save(group);

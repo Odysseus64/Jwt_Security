@@ -7,7 +7,6 @@ import plasma.dto.request.StudentRequest;
 import plasma.dto.request.TeacherRequest;
 import plasma.dto.request.UserRequest;
 import plasma.models.Role;
-import plasma.models.Student;
 import plasma.models.User;
 
 @Component
