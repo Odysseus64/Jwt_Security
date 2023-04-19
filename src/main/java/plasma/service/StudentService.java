@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import plasma.dto.request.StudentRequest;
 import plasma.dto.response.StudentResponse;
 import plasma.mapper.StudentMapper;
+import plasma.mapper.UserMapper;
 import plasma.models.Student;
 import plasma.repository.StudentRepository;
 import plasma.repository.UserRepository;
@@ -30,9 +31,9 @@ public class StudentService {
                     "This email is already have in!"
             );
         }
-        userRepository.save(userMapper.toUser(studentRequest));
-        Student savedStudent = studentRepository.save(studentMapper.toStudent(studentRequest));
-        return modelMapper.map(savedStudent, StudentResponse.class);
+        userRepository.save(userMapper.user(studentRequest));
+        Student student = studentRepository.save(studentMapper.toStudent(studentRequest));
+        return modelMapper.map(student, StudentResponse.class);
     }
 
     public StudentResponse findStudentById(Long id) {
